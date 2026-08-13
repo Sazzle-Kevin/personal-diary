@@ -7,7 +7,7 @@ export default function Header({ onOpenForm }) {
 
       <button
         onClick={onOpenForm}
-        className="px-4 py-2 bg-pink-800 hover:bg-pink-700 text-white font-bold rounded-lg cursor-pointer transition duration-200 shadow-md"
+        className="px-4 py-2 bg-fuchsia-600 hover:bg-fuchsia-500 text-white font-bold rounded-lg cursor-pointer transition duration-200 shadow-md"
       >
         + Neuer Eintrag
       </button>
