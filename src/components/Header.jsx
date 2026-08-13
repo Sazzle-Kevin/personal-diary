@@ -1,19 +1,16 @@
-export default function Header() {
+export default function Header({ onOpenForm }) {
   return (
-    <>
-      <div className="text-center text-2xl w-screen h-auto rounded-b-lg bg-fuchsia-200 text-pink-800 overflow-hidden">
-        <div className="flex justify-between">
-          <button
-            type="button"
-            className="m-1 px-4 py-2 min-w-32 w-auto rounded-lg bg-purple-300 cursor-pointer truncate"
-          >
-            Calender
-          </button>
-          <button className="grow m-1 px-4 py-2 w-5/6 rounded-lg bg-purple-300 cursor-pointer truncate">
-            Mein Tag
-          </button>
-        </div>
-      </div>
-    </>
+    <div className="w-full min-h-[10vh] h-12 rounded-b-xl bg-fuchsia-200 flex items-center justify-between px-6">
+      <h1 className="text-2xl font-serif italic font-bold text-pink-800">
+        📖 Mein Tagebuch
+      </h1>
+
+      <button
+        onClick={onOpenForm}
+        className="px-4 py-2 bg-pink-800 hover:bg-pink-700 text-white font-bold rounded-lg cursor-pointer transition duration-200 shadow-md"
+      >
+        + Neuer Eintrag
+      </button>
+    </div>
   );
 }
