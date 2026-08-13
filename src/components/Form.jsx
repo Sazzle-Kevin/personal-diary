@@ -1,6 +1,56 @@
-export default function Form() {
+import { useState } from "react";
+
+export default function Form({ onAddEntry }) {
+  const [formData, setFormData] = useState({
+    title: "",
+    date: "",
+    image: "",
+    content: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (
+      !formData.title ||
+      !formData.date ||
+      !formData.image ||
+      !formData.content
+    ) {
+      alert("Bitte fülle alles aus.");
+      return;
+    }
+
+    const newEntry = {
+      id: Date.now(),
+      ...formData,
+    };
+
+    if (onAddEntry) {
+      onAddEntry(newEntry);
+    }
+
+    setFormData({
+      title: "",
+      date: "",
+      image: "",
+      content: "",
+    });
+  };
+
   return (
-    <form className="flex flex-col justify-between w-full max-w-md h-full bg-fuchsia-200 rounded-xl border-4 border-fuchsia-800/50 ">
+    <form
+      onSubmit={handleSubmit}
+      className="flex flex-col justify-between w-full max-w-md h-full bg-fuchsia-200 rounded-xl border-4 border-fuchsia-800/50 "
+    >
       <h2 className=" p-4 italic text-4xl font-serif font-bold text-pink-800 mb-4">
         Mein Tag
       </h2>
@@ -14,6 +64,8 @@ export default function Form() {
               type="date"
               id="date"
               name="date"
+              value={formData.date}
+              onChange={handleChange}
               placeholder="DD.MM.YYYY"
               className="px-4 py-2 bg-pink-300 rounded-lg cursor-pointer"
             />
@@ -25,6 +77,8 @@ export default function Form() {
             <input
               id="image"
               name="image"
+              value={formData.image}
+              onChange={handleChange}
               className="px-4 py-2 bg-pink-300 rounded-lg cursor-pointer"
             />
           </div>
@@ -37,6 +91,8 @@ export default function Form() {
             type="text"
             id="title"
             name="title"
+            value={formData.title}
+            onChange={handleChange}
             placeholder="Überschrift"
             className="px-4 py-2 bg-pink-300 rounded-lg cursor-pointer"
           />
@@ -48,6 +104,8 @@ export default function Form() {
           <textarea
             id="content"
             name="content"
+            value={formData.content}
+            onChange={handleChange}
             placeholder="Heute habe ich ..."
             className="grow p-4 font-serif bg-pink-300 rounded-lg cursor-pointer"
           />
